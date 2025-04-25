@@ -1,26 +1,314 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Deep purple theme with more vibrant accents */
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 26, 0, 42;
+  --surface-rgb: 44, 10, 71;
+  --purple-primary: 121, 40, 202;
+  --purple-secondary: 162, 89, 255;
+  --neon-pink: 255, 0, 128;
+  --neon-cyan: 0, 212, 255;
+  --melon-color: 255, 0, 128;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, 
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Modern animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 8px rgba(var(--purple-secondary), 0.5); }
+  50% { box-shadow: 0 0 20px rgba(var(--purple-secondary), 0.8); }
+  100% { box-shadow: 0 0 8px rgba(var(--purple-secondary), 0.5); }
+}
+
+@keyframes buttonPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes moveUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-40px); opacity: 0; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-glow {
+  animation: glowPulse 2s infinite;
+}
+
+.animate-pulse-slow {
+  animation: buttonPulse 4s infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Clean transitions */
+.transition-standard {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Glass effect */
+.glass-panel {
+  background: rgba(44, 10, 71, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(162, 89, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 24px;
+}
+
+/* Neon effects */
+.neon-border {
+  border: 1px solid rgba(162, 89, 255, 0.7);
+  box-shadow: 0 0 15px rgba(162, 89, 255, 0.7);
+  border-radius: 24px;
+}
+
+.neon-text {
+  color: rgb(162, 89, 255);
+  text-shadow: 0 0 10px rgba(162, 89, 255, 0.7);
+}
+
+.neon-pink-text {
+  color: rgb(255, 0, 128);
+  text-shadow: 0 0 10px rgba(255, 0, 128, 0.7);
+}
+
+.neon-cyan-text {
+  color: rgb(0, 212, 255);
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.7);
+}
+
+/* Super rounded corners for modern look */
+.rounded-xl {
+  border-radius: 16px !important;
+}
+
+.rounded-2xl {
+  border-radius: 24px !important;
+}
+
+.rounded-3xl {
+  border-radius: 32px !important;
+}
+
+.rounded-full {
+  border-radius: 9999px !important;
+}
+
+/* Modern button styles */
+.modern-button {
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.modern-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.6s ease;
+}
+
+.modern-button:hover:before {
+  left: 100%;
+}
+
+.primary-button {
+  background: rgba(121, 40, 202, 0.8);
+  color: white;
+  box-shadow: 0 0 15px rgba(121, 40, 202, 0.5);
+}
+
+.primary-button:hover {
+  background: rgba(121, 40, 202, 1);
+  box-shadow: 0 0 25px rgba(121, 40, 202, 0.8);
+  transform: translateY(-3px);
+}
+
+.secondary-button {
+  background: rgba(255, 0, 128, 0.8);
+  color: white;
+  box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
+}
+
+.secondary-button:hover {
+  background: rgba(255, 0, 128, 1);
+  box-shadow: 0 0 25px rgba(255, 0, 128, 0.8);
+  transform: translateY(-3px);
+}
+
+.outline-button {
+  background: transparent;
+  border: 2px solid rgba(162, 89, 255, 0.7);
+  color: rgb(162, 89, 255);
+  box-shadow: 0 0 10px rgba(162, 89, 255, 0.3);
+}
+
+.outline-button:hover {
+  background: rgba(162, 89, 255, 0.15);
+  box-shadow: 0 0 20px rgba(162, 89, 255, 0.6);
+  transform: translateY(-3px);
+}
+
+/* Modern panel styles */
+.modern-panel {
+  border-radius: 24px;
+  background: rgb(44, 10, 71);
+  border: 1px solid rgba(162, 89, 255, 0.2);
+  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.modern-panel-header {
+  background: linear-gradient(90deg, rgba(121, 40, 202, 0.9), rgba(162, 89, 255, 0.7));
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid rgba(162, 89, 255, 0.3);
+  border-radius: 24px 24px 0 0;
+}
+
+.modern-panel-body {
+  padding: 1.75rem;
+}
+
+/* Stat card styles */
+.stat-card {
+  background: rgba(26, 0, 42, 0.7);
+  border-radius: 16px;
+  border: 1px solid rgba(162, 89, 255, 0.2);
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border-color: rgba(162, 89, 255, 0.4);
+}
+
+/* Cool tab styles */
+.tab-button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tab-active {
+  background: rgba(121, 40, 202, 0.3);
+  box-shadow: 0 0 15px rgba(121, 40, 202, 0.3);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(26, 0, 42, 0.5);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(162, 89, 255, 0.5);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(162, 89, 255, 0.7);
+}
+
+/* Focus styles */
+*:focus {
+  outline: 2px solid rgba(162, 89, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Item hover effect */
+.item-hover {
+  transition: all 0.2s ease;
+}
+
+.item-hover:hover {
+  background: rgba(162, 89, 255, 0.1);
+  transform: translateX(5px);
+}
+
+/* Floating effect for important elements */
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Spacious layout */
+.spacious {
+  padding: 2rem;
+  margin: 1.5rem 0;
+}
+
+.spacious-y > * + * {
+  margin-top: 1.5rem;
+}
+
+.spacious-x > * + * {
+  margin-left: 1.5rem;
+}
+
+/* Container with nice max-width */
+.container-game {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .container-game {
+    padding: 0 1.25rem;
+  }
+  
+  .spacious {
+    padding: 1.25rem;
+    margin: 1rem 0;
+  }
 }
